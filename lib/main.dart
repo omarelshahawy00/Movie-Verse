@@ -27,8 +27,8 @@ class MovieApp extends StatelessWidget {
               ..fetchTrendingMovies(),
           ),
           BlocProvider(
-            create: (context) => AllMoviesCubit(getIt.get<HomeRepoImpl>())
-              ..fetchMovies('movie/now_playing?language=en-US'),
+            create: (context) =>
+                AllMoviesCubit(getIt.get<HomeRepoImpl>())..fetchMovies(''),
           ),
         ],
         child: MaterialApp.router(

@@ -29,7 +29,7 @@ class _CategoryItemState extends State<CategoryItem> {
   @override
   void initState() {
     super.initState();
-    context.read<AllMoviesCubit>().fetchMovies('popular');
+    context.read<AllMoviesCubit>().fetchMovies('movie/popular');
   }
 
   @override
