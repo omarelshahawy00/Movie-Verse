@@ -7,7 +7,7 @@ import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubi
 
 class CategoryItem extends StatefulWidget {
   const CategoryItem({super.key});
-//ss
+//sss
   @override
   State<CategoryItem> createState() => _CategoryItemState();
 }
