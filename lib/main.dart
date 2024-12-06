@@ -6,7 +6,6 @@ import 'package:movie_app/core/helpers/get_it.dart';
 import 'package:movie_app/core/helpers/routes.dart';
 import 'package:movie_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubit.dart';
-import 'package:movie_app/features/home/manager/popular_movies_cubit/popular_movies_cubit.dart';
 import 'package:movie_app/features/home/manager/trending_movies_cubit/trending_movie_cubit.dart';
 
 void main() {
@@ -29,7 +28,7 @@ class MovieApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => AllMoviesCubit(getIt.get<HomeRepoImpl>())
-              ..fetchMovies('now_playing?language=en-US'),
+              ..fetchMovies('movie/now_playing?language=en-US'),
           ),
         ],
         child: MaterialApp.router(

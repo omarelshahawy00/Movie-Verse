@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/helpers/spaceing.dart';
 import 'package:movie_app/core/widgets/custom_app_bar.dart';
-import 'package:movie_app/core/widgets/custom_error.dart';
 import 'package:movie_app/core/widgets/custom_loading_indecator.dart';
 import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubit.dart';
-import 'package:movie_app/features/home/manager/popular_movies_cubit/popular_movies_cubit.dart';
 import 'package:movie_app/features/home/ui/widgets/category_item.dart';
 import 'package:movie_app/features/home/ui/widgets/main_movie_item.dart';
 import 'package:movie_app/features/home/ui/widgets/sliding_list_view.dart';
@@ -42,7 +40,11 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
           ),
           BlocBuilder<AllMoviesCubit, AllMoviesState>(
             builder: (context, state) {
-              if (state is AllMoviesSuccess) {
+              if (state is AllMoviesLoading) {
+                return const SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              } else if (state is AllMoviesSuccess) {
                 return SliverPadding(
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   sliver: SliverGrid(
@@ -62,7 +64,9 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
                   ),
                 );
               } else if (state is AllMoviesFailure) {
-                return CustomError(errMessage: state.errMessage);
+                return SliverToBoxAdapter(
+                  child: Center(child: Text(state.errMessage)),
+                );
               } else {
                 return const SliverToBoxAdapter(
                   child: CustomLoadingIndecator(),
