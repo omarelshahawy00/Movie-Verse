@@ -9,14 +9,20 @@ import 'package:movie_app/features/home/ui/widgets/category_item.dart';
 import 'package:movie_app/features/home/ui/widgets/main_movie_item.dart';
 import 'package:movie_app/features/home/ui/widgets/sliding_list_view.dart';
 
-class HomeScreenBody extends StatefulWidget {
-  const HomeScreenBody({super.key});
+class HomeScreenBody extends StatelessWidget {
+  HomeScreenBody({super.key});
 
-  @override
-  State<HomeScreenBody> createState() => _HomeScreenBodyState();
-}
+  final List<String> categories = [
+    'Popular',
+    'Top Rated',
+    'Upcoming',
+  ];
 
-class _HomeScreenBodyState extends State<HomeScreenBody> {
+  final Map<int, String> categoryEndpoints = {
+    0: 'movie/popular',
+    1: 'movie/top_rated',
+    2: 'movie/upcoming',
+  };
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,16 +41,27 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
               ],
             ),
           ),
-          const SliverToBoxAdapter(
-            child: CategoryItem(),
+          SliverToBoxAdapter(
+            child: BlocBuilder<AllMoviesCubit, AllMoviesState>(
+              builder: (context, state) {
+                final selectedIndex =
+                    context.read<AllMoviesCubit>().currentindex;
+                return CategoryItem(
+                  selectedIndex: selectedIndex,
+                  onCategorySelected: (index) {
+                    context.read<AllMoviesCubit>().indexSelector(index);
+                    context
+                        .read<AllMoviesCubit>()
+                        .fetchMovies(categoryEndpoints[index]!);
+                  },
+                  categories: categories,
+                );
+              },
+            ),
           ),
           BlocBuilder<AllMoviesCubit, AllMoviesState>(
             builder: (context, state) {
-              if (state is AllMoviesLoading) {
-                return const SliverToBoxAdapter(
-                  child: Center(child: CircularProgressIndicator()),
-                );
-              } else if (state is AllMoviesSuccess) {
+              if (state is AllMoviesSuccess) {
                 return SliverPadding(
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   sliver: SliverGrid(
@@ -68,8 +85,13 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
                   child: Center(child: Text(state.errMessage)),
                 );
               } else {
-                return const SliverToBoxAdapter(
-                  child: CustomLoadingIndecator(),
+                return SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      verticalSpace(100),
+                      const CustomLoadingIndecator(),
+                    ],
+                  ),
                 );
               }
             },
@@ -79,151 +101,3 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
     );
   }
 }
-
-// class HomeScreenBody extends StatefulWidget {
-//   const HomeScreenBody({
-//     super.key,
-//   });
-
-//   @override
-//   State<HomeScreenBody> createState() => _HomeScreenBodyState();
-// }
-
-// class _HomeScreenBodyState extends State<HomeScreenBody> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: EdgeInsets.symmetric(horizontal: 10.h),
-//       child: CustomScrollView(
-//         physics: const BouncingScrollPhysics(),
-//         slivers: [
-//           // Header Section
-//           SliverToBoxAdapter(
-//             child: Column(
-//               children: [
-//                 verticalSpace(10),
-//                 CustomAppBar(
-//                   onPressed: () {},
-//                 ),
-//                 verticalSpace(10),
-//                 const SlidingListView(),
-//                 verticalSpace(15),
-//               ],
-//             ),
-//           ),
-//           // Title Section
-//           const SliverToBoxAdapter(
-//             child: CategoryItem(),
-//           ),
-//           // Grid Section
-//           BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
-//             builder: (context, state) {
-//               if (state is PopularMoviesSuccess) {
-//                 return SliverPadding(
-//                   padding: EdgeInsets.symmetric(vertical: 20.h),
-//                   sliver: SliverGrid(
-//                     delegate: SliverChildBuilderDelegate(
-//                       (context, index) => MainMovieItem(
-//                         movieModel: state.movies[index],
-//                       ),
-//                       childCount:
-//                           state.movies.length, // Set the number of items here
-//                     ),
-//                     gridDelegate:
-//                         const SliverGridDelegateWithFixedCrossAxisCount(
-//                       crossAxisCount: 2, // Number of items per row
-//                       crossAxisSpacing: 15, // Space between columns
-//                       mainAxisSpacing: 15, // Space between rows
-//                       childAspectRatio:
-//                           0.7, // Adjust the aspect ratio as needed
-//                     ),
-//                   ),
-//                 );
-//               } else if (state is PopularMoviesFailure) {
-//                 return CustomError(errMessage: state.errMessage);
-//               } else {
-//                 return const SliverToBoxAdapter(
-//                   child: CustomLoadingIndecator(),
-//                 );
-//               }
-//             },
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class HomeScreenBody extends StatefulWidget {
-//   const HomeScreenBody({
-//     super.key,
-//   });
-
-//   @override
-//   State<HomeScreenBody> createState() => _HomeScreenBodyState();
-// }
-
-// class _HomeScreenBodyState extends State<HomeScreenBody> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: EdgeInsets.symmetric(horizontal: 10.h),
-//       child: CustomScrollView(
-//         physics: const BouncingScrollPhysics(),
-//         slivers: [
-//           // Header Section
-//           SliverToBoxAdapter(
-//             child: Column(
-//               children: [
-//                 verticalSpace(10),
-//                 CustomAppBar(
-//                   onPressed: () {},
-//                 ),
-//                 verticalSpace(10),
-//                 const SlidingListView(),
-//                 verticalSpace(15),
-//               ],
-//             ),
-//           ),
-//           // Title Section
-//           const SliverToBoxAdapter(
-//             child: CategoryItem(),
-//           ),
-//           // Grid Section
-//           BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
-//             builder: (context, state) {
-//               if (state is PopularMoviesSuccess) {
-//                 return SliverPadding(
-//                   padding: EdgeInsets.symmetric(vertical: 20.h),
-//                   sliver: SliverGrid(
-//                     delegate: SliverChildBuilderDelegate(
-//                       (context, index) => MainMovieItem(
-//                         movieModel: state.movies[index],
-//                       ),
-//                       childCount:
-//                           state.movies.length, // Set the number of items here
-//                     ),
-//                     gridDelegate:
-//                         const SliverGridDelegateWithFixedCrossAxisCount(
-//                       crossAxisCount: 2, // Number of items per row
-//                       crossAxisSpacing: 15, // Space between columns
-//                       mainAxisSpacing: 15, // Space between rows
-//                       childAspectRatio:
-//                           0.7, // Adjust the aspect ratio as needed
-//                     ),
-//                   ),
-//                 );
-//               } else if (state is PopularMoviesFailure) {
-//                 return CustomError(errMessage: state.errMessage);
-//               } else {
-//                 return const SliverToBoxAdapter(
-//                   child: CustomLoadingIndecator(),
-//                 );
-//               }
-//             },
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

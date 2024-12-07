@@ -16,7 +16,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   // Pages for each tab
   final List<Widget> _pages = [
-    const HomeScreenBody(),
+    HomeScreenBody(),
     const SearchScreen(),
     const Center(child: Text('favorites'))
   ];
