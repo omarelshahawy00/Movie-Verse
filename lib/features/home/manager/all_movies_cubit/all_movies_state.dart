@@ -22,3 +22,5 @@ final class AllMoviesFailure extends AllMoviesState {
 
   const AllMoviesFailure(this.errMessage);
 }
+
+final class SelectedIndex extends AllMoviesState {}
