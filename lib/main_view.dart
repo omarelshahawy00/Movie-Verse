@@ -33,6 +33,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.red,
         showSelectedLabels: false,
         type: BottomNavigationBarType.shifting,
         currentIndex: _selectedIndex,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/constants/color_manager.dart';
 import 'package:movie_app/core/helpers/styles.dart';
+import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubit.dart';
+import 'package:movie_app/features/home/manager/category_cubit/category_cubit.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({
+  CategoryItem({
     super.key,
     required this.categories,
     this.onCategorySelected,
@@ -14,6 +17,12 @@ class CategoryItem extends StatelessWidget {
   final void Function(int)? onCategorySelected;
   final List<String> categories;
   final int selectedIndex;
+
+  final Map<int, String> categoryEndpoints = {
+    0: 'movie/popular',
+    1: 'movie/top_rated',
+    2: 'movie/upcoming',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +35,11 @@ class CategoryItem extends StatelessWidget {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => onCategorySelected!(index),
+            onTap: () {
+              BlocProvider.of<CategoryCubit>(context).selectButton(index);
+              BlocProvider.of<AllMoviesCubit>(context)
+                  .fetchMovies(categoryEndpoints[index]!);
+            },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 100),
               margin: const EdgeInsets.all(5),

@@ -68,10 +68,11 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<MovieModel>>> fetchMovies(String category) async {
+  Future<Either<Failure, List<MovieModel>>> fetchMovies(
+      String? category) async {
     try {
-      var data =
-          await apiService.getMoviesData(endPoint: '$category?language=en-US');
+      var data = await apiService.getMoviesData(
+          endPoint: '${category ?? 'movie/popular'}?language=en-US');
 
       List<MovieModel> movies = [];
       for (var item in data['results']) {

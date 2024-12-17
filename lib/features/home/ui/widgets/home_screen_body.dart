@@ -5,6 +5,8 @@ import 'package:movie_app/core/helpers/spaceing.dart';
 import 'package:movie_app/core/widgets/custom_app_bar.dart';
 import 'package:movie_app/core/widgets/custom_loading_indecator.dart';
 import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubit.dart';
+import 'package:movie_app/features/home/manager/category_cubit/category_cubit.dart';
+import 'package:movie_app/features/home/manager/category_cubit/category_state.dart';
 import 'package:movie_app/features/home/ui/widgets/category_item.dart';
 import 'package:movie_app/features/home/ui/widgets/main_movie_item.dart';
 import 'package:movie_app/features/home/ui/widgets/sliding_list_view.dart';
@@ -18,11 +20,6 @@ class HomeScreenBody extends StatelessWidget {
     'Upcoming',
   ];
 
-  final Map<int, String> categoryEndpoints = {
-    0: 'movie/popular',
-    1: 'movie/top_rated',
-    2: 'movie/upcoming',
-  };
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,19 +39,12 @@ class HomeScreenBody extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(
-            child: BlocBuilder<AllMoviesCubit, AllMoviesState>(
+            child: BlocBuilder<CategoryCubit, CategoryState>(
               builder: (context, state) {
-                final selectedIndex =
-                    context.read<AllMoviesCubit>().currentindex;
                 return CategoryItem(
-                  selectedIndex: selectedIndex,
-                  onCategorySelected: (index) {
-                    context.read<AllMoviesCubit>().indexSelector(index);
-                    context
-                        .read<AllMoviesCubit>()
-                        .fetchMovies(categoryEndpoints[index]!);
-                  },
                   categories: categories,
+                  selectedIndex:
+                      BlocProvider.of<CategoryCubit>(context).currentIndex,
                 );
               },
             ),
