@@ -27,7 +27,6 @@ class SlidingListView extends StatelessWidget {
                 autoPlayInterval: const Duration(seconds: 3),
                 viewportFraction: .8,
                 aspectRatio: 9 / 9,
-                initialPage: 0,
               ),
               itemCount: state.movies.length,
               itemBuilder: (context, index, realIndex) {

@@ -27,15 +27,19 @@ class MainMovieItem extends StatelessWidget {
                   end: Alignment.center,
                   stops: [.4.h, 1.h]),
             ),
-            child: CachedNetworkImage(
-              placeholder: (context, url) => Center(
-                child: Image.asset(
-                  'assets/images/loading2.gif',
+            child: Hero(
+              tag: movieModel.id!.toInt(),
+              child: CachedNetworkImage(
+                placeholder: (context, url) => Center(
+                  child: Image.asset(
+                    'assets/images/loading2.gif',
+                  ),
                 ),
+                imageUrl:
+                    '${ApiConstants.baseImageUrl}${movieModel.posterPath}',
+                fit: BoxFit.fill,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-              imageUrl: '${ApiConstants.baseImageUrl}${movieModel.posterPath}',
-              fit: BoxFit.fill,
-              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),

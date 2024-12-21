@@ -21,7 +21,7 @@ class MovieApp extends StatelessWidget {
       designSize: const Size(360, 690),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        routerConfig: Routes().router,
+        routerConfig: Routes.router,
         theme: ThemeData.dark(
           useMaterial3: false,
         ).copyWith(

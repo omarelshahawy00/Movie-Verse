@@ -15,9 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // Delay for 3 seconds, then navigate to the next screen
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(milliseconds: 3900), () {
       // ignore: use_build_context_synchronously
-      context.go(Routes.mainView);
+      GoRouter.of(context).pushReplacement(Routes.mainView);
     });
   }
 

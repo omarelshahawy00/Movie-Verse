@@ -6,27 +6,23 @@ import 'package:movie_app/features/home/data/repos/home_repo_impl.dart';
 part 'all_movies_state.dart';
 
 class AllMoviesCubit extends Cubit<AllMoviesState> {
-  // int currentindex = 0;
   List<MovieModel>? movieModel;
   AllMoviesCubit(this.homeRepo) : super(AllMoviesInitial());
   final HomeRepoImpl homeRepo;
-  Future<void> fetchMovies(String? category) async {
+  fetchMovies(String? category) async {
     emit(AllMoviesLoading());
     final result = await homeRepo.fetchMovies(category);
-    result.fold((failuer) {
-      emit(
-        AllMoviesFailure(failuer.errMessage),
-      );
-    }, (movie) {
-      emit(
-        AllMoviesSuccess(movie),
-      );
-      print('ssssssssssssssssssssssssssssssssssssssssssss');
-    });
+    result.fold(
+      (failuer) {
+        emit(
+          AllMoviesFailure(failuer.errMessage),
+        );
+      },
+      (movie) {
+        emit(
+          AllMoviesSuccess(movie),
+        );
+      },
+    );
   }
-
-  // indexSelector(int index) {
-  //   currentindex = index;
-  //   emit(SelectedIndex());
-  // }
 }

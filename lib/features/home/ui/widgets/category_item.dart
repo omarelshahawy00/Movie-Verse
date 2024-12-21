@@ -7,22 +7,26 @@ import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubi
 import 'package:movie_app/features/home/manager/category_cubit/category_cubit.dart';
 
 class CategoryItem extends StatelessWidget {
-  CategoryItem({
+  const CategoryItem({
     super.key,
-    required this.categories,
     this.onCategorySelected,
     required this.selectedIndex,
   });
 
   final void Function(int)? onCategorySelected;
-  final List<String> categories;
+
   final int selectedIndex;
 
-  final Map<int, String> categoryEndpoints = {
+  static final Map<int, String> categoryEndpoints = {
     0: 'movie/popular',
     1: 'movie/top_rated',
     2: 'movie/upcoming',
   };
+  static final List<String> categories = [
+    'Popular',
+    'Top Rated',
+    'Upcoming',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +41,10 @@ class CategoryItem extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               BlocProvider.of<CategoryCubit>(context).selectButton(index);
-              BlocProvider.of<AllMoviesCubit>(context)
-                  .fetchMovies(categoryEndpoints[index]!);
+              if (selectedIndex != index) {
+                BlocProvider.of<AllMoviesCubit>(context)
+                    .fetchMovies(categoryEndpoints[index]);
+              }
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 100),

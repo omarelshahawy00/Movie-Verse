@@ -19,7 +19,6 @@ class PopularMoviesCubit extends Cubit<PopularMoviesState> {
       emit(
         PopularMoviesSuccess(movie),
       );
-      print('ssssssssssssssssssssssssssssssssssssssssssss');
     });
   }
 }
