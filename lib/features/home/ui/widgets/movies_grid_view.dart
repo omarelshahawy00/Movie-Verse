@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/helpers/routes.dart';
 import 'package:movie_app/core/helpers/spaceing.dart';
 import 'package:movie_app/core/widgets/custom_loading_indecator.dart';
-import 'package:movie_app/features/home/data/models/movie_model.dart';
 import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubit.dart';
 import 'package:movie_app/features/home/ui/widgets/main_movie_item.dart';
 
@@ -24,7 +23,7 @@ class MoviesGridView extends StatelessWidget {
                 (context, index) => GestureDetector(
                   onTap: () {
                     GoRouter.of(context).push(Routes.movieDetailsScreen,
-                        extra: state.movie[index]);
+                        extra: (state.movie[index]));
                   },
                   child: MainMovieItem(
                     movieModel: state.movie[index],

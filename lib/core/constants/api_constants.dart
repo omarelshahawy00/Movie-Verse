@@ -5,4 +5,6 @@ class ApiConstants {
   static const String trendingMoviesUrl = 'trending/movie/day?language=en-US';
   static const String popularMoviesUrl = 'movie/popular?language=en-US';
   static const String topRatedMoviesUrl = 'movie/top_rated?language=en-US';
+  static const String baseUrlForCredits = 'https://api.themoviedb.org/3/movie/';
+  static const String constCreditsUrl = '/credits?language=en-US';
 }

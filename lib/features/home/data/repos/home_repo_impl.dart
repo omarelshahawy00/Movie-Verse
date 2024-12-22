@@ -75,6 +75,7 @@ class HomeRepoImpl implements HomeRepo {
           endPoint: '${category ?? 'movie/popular'}?language=en-US');
 
       List<MovieModel> movies = [];
+
       for (var item in data['results']) {
         movies.add(MovieModel.fromJson(item));
       }
