@@ -6,8 +6,10 @@ import 'package:movie_app/features/home/data/models/movie_model.dart';
 import 'package:movie_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubit.dart';
 import 'package:movie_app/features/home/manager/navbar_cubit/bottom_navbar_cubit.dart';
+import 'package:movie_app/features/movie_details/data/models/video_model.dart';
 import 'package:movie_app/features/movie_details/data/repos/details_repo_impl.dart';
 import 'package:movie_app/features/movie_details/manager/cast_cubit/cast_cubit.dart';
+import 'package:movie_app/features/movie_details/manager/trailer/trailer_cubit.dart';
 import 'package:movie_app/features/movie_details/ui/movie_details_screen.dart';
 import 'package:movie_app/features/splash/ui/splash_screen.dart';
 import 'package:movie_app/main_view.dart';
@@ -51,8 +53,16 @@ class Routes {
         path: movieDetailsScreen,
         builder: (BuildContext context, GoRouterState state) {
           final movie = state.extra as MovieModel; // Extract the movie object
-          return BlocProvider(
-            create: (context) => CastCubit(getIt.get<DetailsRepoImpl>()),
+
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => CastCubit(getIt.get<DetailsRepoImpl>()),
+              ),
+              BlocProvider(
+                create: (context) => TrailerCubit(getIt.get<DetailsRepoImpl>()),
+              ),
+            ],
             child: MovieDetailsScreen(movie: movie),
           );
         },

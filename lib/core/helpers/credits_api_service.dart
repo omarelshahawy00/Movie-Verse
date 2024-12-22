@@ -11,4 +11,10 @@ class CreditsApiService {
         '${ApiConstants.baseUrlForCredits}$movieId${ApiConstants.constCreditsUrl}${ApiConstants.apiKey}');
     return response.data;
   }
+
+  getTrailerData({required int movieId}) async {
+    var response = await dio.get(
+        '${ApiConstants.baseUrlForCredits}$movieId${ApiConstants.constVideoUrl}${ApiConstants.apiKey}');
+    return response.data;
+  }
 }
