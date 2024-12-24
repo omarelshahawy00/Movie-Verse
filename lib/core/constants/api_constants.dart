@@ -9,4 +9,7 @@ class ApiConstants {
   static const String constCreditsUrl = '/credits?language=en-US';
   static const String constVideoUrl = '/videos?language=en-US';
   static const String youtubeBaseUrl = 'https://www.youtube.com/watch?v=';
+  static const String basePresonUrl = 'https://api.themoviedb.org/3/person/';
+  static const String searchBaseUrl =
+      'https://api.themoviedb.org/3/search/movie?query=';
 }

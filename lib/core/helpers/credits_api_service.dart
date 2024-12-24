@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
+import 'package:movie_app/features/actor_details/data/model/actor_model.dart';
 
 class CreditsApiService {
   final Dio dio;
@@ -15,6 +16,25 @@ class CreditsApiService {
   getTrailerData({required int movieId}) async {
     var response = await dio.get(
         '${ApiConstants.baseUrlForCredits}$movieId${ApiConstants.constVideoUrl}${ApiConstants.apiKey}');
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> getPersonData({required int? personId}) async {
+    var response = await dio.get(
+        '${ApiConstants.basePresonUrl}$personId?language=en-US${ApiConstants.apiKey}');
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> getPersonMovies({required int? personId}) async {
+    var response = await dio.get(
+        '${ApiConstants.basePresonUrl}$personId/combined_credits?language=en-US${ApiConstants.apiKey}');
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> getSearchedMovies(
+      {required String query}) async {
+    var response = await dio.get(
+        '${ApiConstants.searchBaseUrl}$query&language=en-US${ApiConstants.apiKey}');
     return response.data;
   }
 }

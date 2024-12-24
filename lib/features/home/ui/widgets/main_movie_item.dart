@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
-import 'package:movie_app/core/helpers/styles.dart';
+import 'package:movie_app/core/theming/styles.dart';
 import 'package:movie_app/core/widgets/rating_item.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
 

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/helpers/spaceing.dart';
-import 'package:movie_app/core/helpers/styles.dart';
+import 'package:movie_app/core/theming/styles.dart';
+import 'package:movie_app/core/widgets/custom_rounded_container.dart';
 import 'package:movie_app/core/widgets/rating_item.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
 
 class DetailsSection extends StatelessWidget {
   const DetailsSection({super.key, required this.movie});
   final MovieModel movie;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,34 +23,14 @@ class DetailsSection extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.r),
-                        border: Border.all(
-                          width: 1.w,
-                          color: const Color.fromARGB(255, 146, 146, 146),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Release Date : ${movie.releaseDate}'),
-                      ),
+                    CustomRoundedContainer(
+                      insideTitle: 'Release Date : ${movie.releaseDate}',
                     ),
                     verticalSpace(10),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.r),
-                        border: Border.all(
-                          width: 1,
-                          color: const Color.fromARGB(255, 146, 146, 146),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            'Main Language : ${movie.originalLanguage!.toUpperCase()}'),
-                      ),
-                    ),
+                    CustomRoundedContainer(
+                      insideTitle:
+                          'Main Language : ${movie.originalLanguage!.toUpperCase()}',
+                    )
                   ],
                 ),
                 horizontalSpace(20),
