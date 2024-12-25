@@ -1,5 +1,5 @@
 import 'package:movie_app/core/helpers/credits_api_service.dart';
-import 'package:movie_app/features/search/data/models/search_model.dart';
+import 'package:movie_app/features/home/data/models/movie_model.dart';
 import 'package:movie_app/features/search/data/repo/search_repo.dart';
 
 class SearchRepoImpl extends SearchRepo {
@@ -7,11 +7,11 @@ class SearchRepoImpl extends SearchRepo {
 
   SearchRepoImpl(this.creditsApiService);
   @override
-  Future<List<SearchModel>> searchMovies(String query) async {
+  Future<List<MovieModel>> searchMovies(String query) async {
     var results = await creditsApiService.getSearchedMovies(query: query);
-    List<SearchModel> searchResults = [];
+    List<MovieModel> searchResults = [];
     for (var movie in results['results']) {
-      searchResults.add(SearchModel.fromJson(movie));
+      searchResults.add(MovieModel.fromJson(movie));
     }
     return searchResults;
   }

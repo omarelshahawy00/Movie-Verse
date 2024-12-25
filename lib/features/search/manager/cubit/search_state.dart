@@ -7,7 +7,7 @@ final class SearchInitial extends SearchState {}
 final class SearchLoading extends SearchState {}
 
 final class SearchSuccess extends SearchState {
-  final List<SearchModel> movies;
+  final List<MovieModel> movies;
 
   SearchSuccess(this.movies);
 }

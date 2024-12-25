@@ -9,10 +9,8 @@ import 'package:movie_app/features/movie_details/ui/widgets/stretched_appbar.dar
 import 'package:movie_app/features/search/data/models/search_model.dart';
 
 class MovieDetailsScreenBody extends StatelessWidget {
-  const MovieDetailsScreenBody(
-      {super.key, required this.movie, required this.search});
+  const MovieDetailsScreenBody({super.key, required this.movie});
   final MovieModel movie;
-  final SearchModel search;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class MovieDetailsScreenBody extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            StretchedAppbar(movie: movie, search: search),
+            StretchedAppbar(movie: movie),
             SliverToBoxAdapter(
               child: verticalSpace(20),
             ),

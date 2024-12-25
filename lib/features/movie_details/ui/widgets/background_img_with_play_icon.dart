@@ -6,10 +6,9 @@ import 'package:movie_app/features/home/data/models/movie_model.dart';
 import 'package:movie_app/features/search/data/models/search_model.dart';
 
 class BackgroundImgWithPlayIcon extends StatelessWidget {
-  const BackgroundImgWithPlayIcon(
-      {super.key, required this.movie, required this.search});
+  const BackgroundImgWithPlayIcon({super.key, required this.movie});
   final MovieModel movie;
-  final SearchModel search;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -25,9 +24,7 @@ class BackgroundImgWithPlayIcon extends StatelessWidget {
               bottomRight: Radius.circular(30.r),
             ),
             child: CachedNetworkImage(
-              imageUrl: movie.posterPath != null
-                  ? '${ApiConstants.baseImageUrl}${movie.posterPath}'
-                  : '${ApiConstants.baseImageUrl}${search.posterPath}',
+              imageUrl: '${ApiConstants.baseImageUrl}${movie.posterPath}',
               filterQuality: FilterQuality.high,
               fit: BoxFit.fill,
             ),

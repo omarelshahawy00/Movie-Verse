@@ -42,12 +42,10 @@ class Routes {
             providers: [
               BlocProvider(
                 create: (context) =>
-                    TrendingMovieCubit(getIt.get<HomeRepoImpl>())
-                      ..fetchTrendingMovies(),
+                    TrendingMovieCubit(getIt.get<HomeRepoImpl>()),
               ),
               BlocProvider(
-                create: (context) => AllMoviesCubit(getIt.get<HomeRepoImpl>())
-                  ..fetchMovies(null),
+                create: (context) => AllMoviesCubit(getIt.get<HomeRepoImpl>()),
               ),
               BlocProvider(create: (context) => CategoryCubit()),
               BlocProvider(create: (context) => BottomNavbarCubit()),
@@ -59,16 +57,7 @@ class Routes {
       GoRoute(
         path: movieDetailsScreen,
         builder: (BuildContext context, GoRouterState state) {
-          final extra = state.extra;
-          MovieModel? movieModel;
-          SearchModel? searchedMovie;
-
-          if (extra is MovieModel) {
-            movieModel = extra;
-          } else if (extra is SearchModel) {
-            searchedMovie = extra;
-          }
-          // final movie = state.extra as MovieModel; // Extract the movie object
+          final movie = state.extra as MovieModel; // Extract the movie object
 
           return MultiBlocProvider(
             providers: [
@@ -80,10 +69,8 @@ class Routes {
               ),
             ],
             child: MovieDetailsScreen(
-              movie: movieModel ??
-                  MovieModel(), // Provide a default value or handle null case
-              search: searchedMovie ??
-                  SearchModel(), // Provide a default value or handle null case
+              movie: movie, // Provide a default value or handle null case
+              // Provide a default value or handle null case
             ),
           );
         },

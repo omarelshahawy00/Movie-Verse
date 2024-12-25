@@ -11,9 +11,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/widgets/custom_error.dart';
 
 class StretchedAppbar extends StatelessWidget {
-  const StretchedAppbar({super.key, required this.movie, required this.search});
+  const StretchedAppbar({super.key, required this.movie});
   final MovieModel movie;
-  final SearchModel search;
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -41,7 +41,6 @@ class StretchedAppbar extends StatelessWidget {
                   },
                   child: BackgroundImgWithPlayIcon(
                     movie: movie,
-                    search: search,
                   ),
                 ),
               ),

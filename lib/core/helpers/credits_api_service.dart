@@ -8,32 +8,32 @@ class CreditsApiService {
   CreditsApiService(this.dio);
 
   getCastsData({required int movieId}) async {
-    var response = await dio.get(
+    Response response = await dio.get(
         '${ApiConstants.baseUrlForCredits}$movieId${ApiConstants.constCreditsUrl}${ApiConstants.apiKey}');
     return response.data;
   }
 
   getTrailerData({required int movieId}) async {
-    var response = await dio.get(
+    Response response = await dio.get(
         '${ApiConstants.baseUrlForCredits}$movieId${ApiConstants.constVideoUrl}${ApiConstants.apiKey}');
     return response.data;
   }
 
   Future<Map<String, dynamic>> getPersonData({required int? personId}) async {
-    var response = await dio.get(
+    Response response = await dio.get(
         '${ApiConstants.basePresonUrl}$personId?language=en-US${ApiConstants.apiKey}');
     return response.data;
   }
 
   Future<Map<String, dynamic>> getPersonMovies({required int? personId}) async {
-    var response = await dio.get(
+    Response response = await dio.get(
         '${ApiConstants.basePresonUrl}$personId/combined_credits?language=en-US${ApiConstants.apiKey}');
     return response.data;
   }
 
   Future<Map<String, dynamic>> getSearchedMovies(
       {required String query}) async {
-    var response = await dio.get(
+    Response response = await dio.get(
         '${ApiConstants.searchBaseUrl}$query&language=en-US${ApiConstants.apiKey}');
     return response.data;
   }

@@ -11,28 +11,16 @@ import 'package:movie_app/features/search/data/repo/search_repo_impl.dart';
 import 'package:movie_app/features/search/manager/cubit/search_cubit.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
-  const MovieDetailsScreen(
-      {super.key, required this.movie, required this.search});
+  const MovieDetailsScreen({super.key, required this.movie});
   final MovieModel movie;
-  final SearchModel search;
+  // final SearchModel search;
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) =>
-              CastCubit(getIt.get<DetailsRepoImpl>())..fetchCastData(movie.id),
-        ),
-        BlocProvider(
-          create: (context) => TrailerCubit(getIt.get<DetailsRepoImpl>())
-            ..fetchTrailerData(movie.id),
-        ),
-      ],
-      child: MovieDetailsScreenBody(
-        search: search,
-        movie: movie,
-      ),
+    BlocProvider.of<CastCubit>(context).fetchCastData(movie.id);
+    BlocProvider.of<TrailerCubit>(context).fetchTrailerData(movie.id);
+    return MovieDetailsScreenBody(
+      movie: movie,
     );
   }
 }
