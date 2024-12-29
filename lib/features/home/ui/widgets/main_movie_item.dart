@@ -24,7 +24,7 @@ class _MainMovieItemState extends State<MainMovieItem> {
   @override
   void initState() {
     super.initState();
-    // Check if the movie is already in favorites
+
     isFav =
         HiveServices.getItems().any((item) => item.id == widget.movieModel.id);
   }
@@ -37,11 +37,14 @@ class _MainMovieItemState extends State<MainMovieItem> {
     if (isFav) {
       HiveServices.addItem(
           movie: FavoritesModel(
-        posterPath: widget.movieModel.posterPath!,
-        title: widget.movieModel.title!,
-        id: widget.movieModel.id!,
-        voteAverage: widget.movieModel.voteAverage!,
-        voteCount: widget.movieModel.voteCount!,
+        posterPath: widget.movieModel.posterPath ?? '',
+        title: widget.movieModel.title ?? '',
+        id: widget.movieModel.id ?? 0,
+        voteAverage: widget.movieModel.voteAverage ?? 0.0,
+        voteCount: widget.movieModel.voteCount ?? 0,
+        releaseDate: widget.movieModel.releaseDate ?? 'Unknown',
+        overview: widget.movieModel.overview ?? 'No overview available',
+        mainLanguage: widget.movieModel.originalLanguage ?? 'Unknown',
       ));
     } else {
       if (widget.movieModel.id != null) {
@@ -65,7 +68,7 @@ class _MainMovieItemState extends State<MainMovieItem> {
                 ],
                 begin: Alignment.bottomCenter,
                 end: Alignment.center,
-                stops: [0.4, 1.0],
+                stops: const [0.4, 1.0],
               ),
             ),
             child: Hero(
@@ -83,8 +86,8 @@ class _MainMovieItemState extends State<MainMovieItem> {
           ),
         ),
         Positioned(
-          left: 120,
-          top: 200,
+          left: 113.w,
+          top: 180.h,
           child: GestureDetector(
             onTap: _toggleFavorite,
             child: Icon(

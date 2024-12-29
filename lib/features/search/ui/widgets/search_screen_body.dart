@@ -6,7 +6,7 @@ import 'package:movie_app/core/helpers/routes.dart';
 import 'package:movie_app/core/theming/styles.dart';
 import 'package:movie_app/core/widgets/app_text_form_field.dart';
 import 'package:movie_app/core/widgets/rating_item.dart';
-import 'package:movie_app/features/actor_details/ui/widgets/custome_movie_item.dart';
+import 'package:movie_app/core/widgets/custome_movie_item.dart';
 
 import 'package:movie_app/features/search/manager/cubit/search_cubit.dart';
 

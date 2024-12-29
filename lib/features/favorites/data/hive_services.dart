@@ -26,6 +26,7 @@ class HiveServices {
   static Future<void> deleteItem(int id) async {
     final box = Hive.box<FavoritesModel>(favMovies);
     await box.delete(id);
+    ;
 
     // Logging and Verification
     final deletedItem = box.get(id);

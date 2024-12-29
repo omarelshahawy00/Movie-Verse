@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/constants/color_manager.dart';
+import 'package:movie_app/features/favorites/data/hive_services.dart';
 
 class CustomeMovieItem extends StatelessWidget {
   const CustomeMovieItem({
@@ -10,12 +12,14 @@ class CustomeMovieItem extends StatelessWidget {
     this.movieName,
     this.rating,
     this.txtStyle,
+    this.icon,
   });
   final String imageUrl;
   final Widget? placeHolder;
   final String? movieName;
   final Widget? rating;
   final TextStyle? txtStyle;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +52,16 @@ class CustomeMovieItem extends StatelessWidget {
           ),
         ),
         Positioned(
+          left: 110.w,
+          top: 180.h,
+          child: icon ?? Container(),
+        ),
+        Positioned(
           bottom: 30.h,
           left: 7.5.w,
           right: 0,
           child: Container(
-            margin: EdgeInsets.only(left: 7.5.w, right: 15.w),
+            margin: EdgeInsets.only(left: 7.5.w, right: 50.w),
             child: Text(
               maxLines: 2,
               movieName ?? '',

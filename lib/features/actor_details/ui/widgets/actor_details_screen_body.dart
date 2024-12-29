@@ -9,7 +9,7 @@ import 'package:movie_app/core/theming/styles.dart';
 import 'package:movie_app/core/widgets/custom_error.dart';
 import 'package:movie_app/core/widgets/custom_loading_indecator.dart';
 import 'package:movie_app/core/widgets/rating_item.dart';
-import 'package:movie_app/features/actor_details/ui/widgets/custome_movie_item.dart';
+import 'package:movie_app/core/widgets/custome_movie_item.dart';
 import 'package:movie_app/features/actor_details/manager/actor_cubit/actor_cubit.dart';
 import 'package:movie_app/features/actor_details/manager/actor_movies_cubit/actor_movies_cubit.dart';
 import 'package:movie_app/features/actor_details/ui/widgets/actor_details_section.dart';

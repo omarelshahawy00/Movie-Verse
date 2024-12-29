@@ -17,18 +17,21 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return FavoritesModel(
-      posterPath: fields[0] as String,
-      title: fields[1] as String,
-      id: fields[2] as int,
-      voteAverage: fields[3] as double,
-      voteCount: fields[4] as int,
+      posterPath: fields[0] as String?,
+      title: fields[1] as String?,
+      id: fields[2] as int?,
+      voteAverage: fields[3] as double?,
+      voteCount: fields[4] as int?,
+      releaseDate: fields[5] as String?,
+      overview: fields[6] as String?,
+      mainLanguage: fields[7] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, FavoritesModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.posterPath)
       ..writeByte(1)
@@ -38,7 +41,13 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
       ..writeByte(3)
       ..write(obj.voteAverage)
       ..writeByte(4)
-      ..write(obj.voteCount);
+      ..write(obj.voteCount)
+      ..writeByte(5)
+      ..write(obj.releaseDate)
+      ..writeByte(6)
+      ..write(obj.overview)
+      ..writeByte(7)
+      ..write(obj.mainLanguage);
   }
 
   @override
