@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
 import 'package:movie_app/core/constants/color_manager.dart';
 import 'package:movie_app/core/theming/styles.dart';

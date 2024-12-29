@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
-import 'package:movie_app/features/search/data/models/search_model.dart';
 import 'package:movie_app/features/search/data/repo/search_repo_impl.dart';
 
 part 'search_state.dart';

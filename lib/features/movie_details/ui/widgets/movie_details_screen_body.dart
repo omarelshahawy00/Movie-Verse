@@ -6,7 +6,6 @@ import 'package:movie_app/features/home/data/models/movie_model.dart';
 import 'package:movie_app/features/movie_details/ui/widgets/cast_list_section.dart';
 import 'package:movie_app/features/movie_details/ui/widgets/details_section.dart';
 import 'package:movie_app/features/movie_details/ui/widgets/stretched_appbar.dart';
-import 'package:movie_app/features/search/data/models/search_model.dart';
 
 class MovieDetailsScreenBody extends StatelessWidget {
   const MovieDetailsScreenBody({super.key, required this.movie});

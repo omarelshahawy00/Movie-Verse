@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:movie_app/features/actor_details/data/model/actor_movies_model.dart';
 import 'package:movie_app/features/actor_details/data/repo/actor_repo_impl.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
 
@@ -18,6 +17,7 @@ class ActorMoviesCubit extends Cubit<ActorMoviesState> {
       },
     ).catchError((e) {
       emit(ActorMoviesFailure(e.toString()));
+      return [];
     });
     return actorMovies;
   }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
-import 'package:movie_app/features/search/data/models/search_model.dart';
 
 class BackgroundImgWithPlayIcon extends StatelessWidget {
   const BackgroundImgWithPlayIcon({super.key, required this.movie});

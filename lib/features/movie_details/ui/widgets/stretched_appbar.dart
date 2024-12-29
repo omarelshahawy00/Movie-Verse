@@ -5,7 +5,6 @@ import 'package:movie_app/core/theming/styles.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
 import 'package:movie_app/features/movie_details/manager/trailer/trailer_cubit.dart';
 import 'package:movie_app/features/movie_details/ui/widgets/background_img_with_play_icon.dart';
-import 'package:movie_app/features/search/data/models/search_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/widgets/custom_error.dart';

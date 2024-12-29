@@ -5,13 +5,11 @@ import 'package:movie_app/core/constants/api_constants.dart';
 import 'package:movie_app/core/constants/color_manager.dart';
 import 'package:movie_app/core/helpers/routes.dart';
 import 'package:movie_app/core/theming/styles.dart';
-import 'package:movie_app/core/widgets/app_text_form_field.dart';
 import 'package:movie_app/core/widgets/rating_item.dart';
 import 'package:movie_app/core/widgets/custome_movie_item.dart';
 import 'package:movie_app/features/favorites/data/hive_services.dart';
 import 'package:movie_app/features/favorites/data/models/favorites_model_extension.dart';
 import 'package:movie_app/features/favorites/manager/cubit/favorites_cubit.dart';
-import 'package:movie_app/features/search/manager/cubit/search_cubit.dart';
 
 class FavoritesScreenBody extends StatefulWidget {
   const FavoritesScreenBody({super.key});

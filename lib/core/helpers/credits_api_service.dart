@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
-import 'package:movie_app/features/actor_details/data/model/actor_model.dart';
 
 class CreditsApiService {
   final Dio dio;

@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_app/core/constants/color_manager.dart';
-import 'package:movie_app/features/favorites/data/hive_services.dart';
 
 class CustomeMovieItem extends StatelessWidget {
   const CustomeMovieItem({
