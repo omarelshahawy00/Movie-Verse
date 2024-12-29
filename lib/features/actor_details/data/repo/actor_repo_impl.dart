@@ -2,6 +2,7 @@ import 'package:movie_app/core/helpers/credits_api_service.dart';
 import 'package:movie_app/features/actor_details/data/model/actor_model.dart';
 import 'package:movie_app/features/actor_details/data/model/actor_movies_model.dart';
 import 'package:movie_app/features/actor_details/data/repo/actor_repo.dart';
+import 'package:movie_app/features/home/data/models/movie_model.dart';
 
 class ActorRepoImpl extends ActorRepo {
   final CreditsApiService creditsApiService;
@@ -18,12 +19,12 @@ class ActorRepoImpl extends ActorRepo {
   }
 
   @override
-  Future<List<ActorMoviesModel>> getActorMovies(int personId) async {
+  Future<List<MovieModel>> getActorMovies(int personId) async {
     final actorMovie =
         await creditsApiService.getPersonMovies(personId: personId);
-    List<ActorMoviesModel> actorMovies = [];
+    List<MovieModel> actorMovies = [];
     for (var movie in actorMovie['cast']) {
-      actorMovies.add(ActorMoviesModel.fromJson(movie));
+      actorMovies.add(MovieModel.fromJson(movie));
     }
     return actorMovies;
   }

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/helpers/get_it.dart';
-import 'package:movie_app/features/actor_details/data/model/actor_model.dart';
 import 'package:movie_app/features/actor_details/data/repo/actor_repo_impl.dart';
 import 'package:movie_app/features/actor_details/manager/actor_cubit/actor_cubit.dart';
 import 'package:movie_app/features/actor_details/manager/actor_movies_cubit/actor_movies_cubit.dart';
 import 'package:movie_app/features/actor_details/ui/actor_details_screen.dart';
+import 'package:movie_app/features/favorites/data/models/favorites_model.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
 import 'package:movie_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubit.dart';
 import 'package:movie_app/features/home/manager/navbar_cubit/bottom_navbar_cubit.dart';
+import 'package:movie_app/features/home/ui/home_screen.dart';
 import 'package:movie_app/features/movie_details/data/models/cast_model.dart';
 import 'package:movie_app/features/movie_details/data/repos/details_repo_impl.dart';
 import 'package:movie_app/features/movie_details/manager/cast_cubit/cast_cubit.dart';
 import 'package:movie_app/features/movie_details/manager/trailer/trailer_cubit.dart';
 import 'package:movie_app/features/movie_details/ui/movie_details_screen.dart';
-import 'package:movie_app/features/search/data/models/search_model.dart';
 import 'package:movie_app/features/splash/ui/splash_screen.dart';
 import 'package:movie_app/main_view.dart';
 
@@ -79,6 +79,12 @@ class Routes {
         path: splashScreen,
         builder: (BuildContext context, GoRouterState state) {
           return const SplashScreen();
+        },
+      ),
+      GoRoute(
+        path: homeScreen,
+        builder: (BuildContext context, GoRouterState state) {
+          return const HomeScreen();
         },
       ),
       GoRoute(

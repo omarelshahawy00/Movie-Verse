@@ -6,10 +6,10 @@ import 'package:movie_app/features/home/data/repos/home_repo_impl.dart';
 part 'all_movies_state.dart';
 
 class AllMoviesCubit extends Cubit<AllMoviesState> {
-  List<MovieModel>? movieModel;
+  List<MovieModel> movieModel = [];
   AllMoviesCubit(this.homeRepo) : super(AllMoviesInitial());
   final HomeRepoImpl homeRepo;
-  fetchMovies(String? category) async {
+  Future<List<MovieModel>> fetchMovies(String? category) async {
     emit(AllMoviesLoading());
     final result = await homeRepo.fetchMovies(category);
     result.fold(
@@ -22,7 +22,9 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
         emit(
           AllMoviesSuccess(movie),
         );
+        movieModel = movie;
       },
     );
+    return movieModel;
   }
 }

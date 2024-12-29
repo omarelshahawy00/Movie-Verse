@@ -9,10 +9,10 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.searchRepoImpl) : super(SearchInitial());
   final SearchRepoImpl searchRepoImpl;
   List<MovieModel> search = [];
-  List<MovieModel> searchMovies(String query) {
+  Future<void> searchMovies(String query) async {
     emit(SearchLoading());
 
-    searchRepoImpl.searchMovies(query).then(
+    await searchRepoImpl.searchMovies(query).then(
       (movies) {
         emit(SearchSuccess(movies));
         search = movies;
@@ -20,6 +20,6 @@ class SearchCubit extends Cubit<SearchState> {
     ).catchError((e) {
       emit(SearchFailure(e.toString()));
     });
-    return search;
+    // return search;
   }
 }

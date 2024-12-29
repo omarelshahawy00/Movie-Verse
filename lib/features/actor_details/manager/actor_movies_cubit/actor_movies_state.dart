@@ -7,7 +7,7 @@ final class ActorMoviesInitial extends ActorMoviesState {}
 final class ActorMoviesLoading extends ActorMoviesState {}
 
 final class ActorMoviesSuccess extends ActorMoviesState {
-  final List<ActorMoviesModel> actorMovies;
+  final List<MovieModel> actorMovies;
 
   ActorMoviesSuccess(this.actorMovies);
 }

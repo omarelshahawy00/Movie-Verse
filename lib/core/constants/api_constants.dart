@@ -12,4 +12,6 @@ class ApiConstants {
   static const String basePresonUrl = 'https://api.themoviedb.org/3/person/';
   static const String searchBaseUrl =
       'https://api.themoviedb.org/3/search/movie?query=';
+
+  static var backdropPath;
 }

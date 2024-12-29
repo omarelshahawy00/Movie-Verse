@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_app/features/actor_details/data/model/actor_movies_model.dart';
 
 class CustomeMovieItem extends StatelessWidget {
   const CustomeMovieItem({
@@ -50,11 +49,15 @@ class CustomeMovieItem extends StatelessWidget {
         ),
         Positioned(
           bottom: 30.h,
-          left: 15.w,
+          left: 7.5.w,
           right: 0,
-          child: Text(
-            movieName ?? '',
-            style: txtStyle,
+          child: Container(
+            margin: EdgeInsets.only(left: 7.5.w, right: 15.w),
+            child: Text(
+              maxLines: 2,
+              movieName ?? '',
+              style: txtStyle?.copyWith(overflow: TextOverflow.ellipsis),
+            ),
           ),
         ),
         Positioned(

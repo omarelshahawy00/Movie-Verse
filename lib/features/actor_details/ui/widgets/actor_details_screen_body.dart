@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
+import 'package:movie_app/core/helpers/routes.dart';
 import 'package:movie_app/core/helpers/spaceing.dart';
 import 'package:movie_app/core/theming/styles.dart';
 import 'package:movie_app/core/widgets/custom_error.dart';
@@ -66,22 +68,29 @@ class ActorDetailsScreenBody extends StatelessWidget {
                         delegate: SliverChildBuilderDelegate(
                           childCount: state.actorMovies.length,
                           (context, index) {
-                            return CustomeMovieItem(
-                              rating: RatingItem(
-                                count:
-                                    state.actorMovies[index].voteCount!.toInt(),
-                                avg: double.parse(
-                                  state.actorMovies[index].voteAverage!
-                                      .toStringAsFixed(1),
+                            return GestureDetector(
+                              onTap: () {
+                                GoRouter.of(context).push(
+                                    Routes.movieDetailsScreen,
+                                    extra: state.actorMovies[index]);
+                              },
+                              child: CustomeMovieItem(
+                                rating: RatingItem(
+                                  count: state.actorMovies[index].voteCount!
+                                      .toInt(),
+                                  avg: double.parse(
+                                    state.actorMovies[index].voteAverage!
+                                        .toStringAsFixed(1),
+                                  ),
                                 ),
+                                movieName: (state.actorMovies[index].title),
+                                txtStyle: Styles.textStyle16
+                                    .copyWith(fontWeight: FontWeight.bold),
+                                imageUrl: state.actorMovies[index].posterPath !=
+                                        null
+                                    ? '${ApiConstants.baseImageUrl}${state.actorMovies[index].posterPath}'
+                                    : 'https://files.oaiusercontent.com/file-LqhGwCxtVmTrTjuzQNfNBZ?se=2024-12-23T15%3A36%3A09Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D166e1004-c224-4d86-9972-945453b0c49a.webp&sig=jfAmSRXms8/qCGQxAR7ioxWobQSZdnaxyNhuqXH23zw%3D',
                               ),
-                              movieName: (state.actorMovies[index].title),
-                              txtStyle: Styles.textStyle16
-                                  .copyWith(fontWeight: FontWeight.bold),
-                              imageUrl: state.actorMovies[index].posterPath !=
-                                      null
-                                  ? '${ApiConstants.baseImageUrl}${state.actorMovies[index].posterPath}'
-                                  : 'https://files.oaiusercontent.com/file-LqhGwCxtVmTrTjuzQNfNBZ?se=2024-12-23T15%3A36%3A09Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D166e1004-c224-4d86-9972-945453b0c49a.webp&sig=jfAmSRXms8/qCGQxAR7ioxWobQSZdnaxyNhuqXH23zw%3D',
                             );
                           },
                         ),
@@ -102,7 +111,7 @@ class ActorDetailsScreenBody extends StatelessWidget {
                       child: Column(
                         children: [
                           verticalSpace(80),
-                          CustomLoadingIndecator(),
+                          const CustomLoadingIndecator(),
                         ],
                       ),
                     );
