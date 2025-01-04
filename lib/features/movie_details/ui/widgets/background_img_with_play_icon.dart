@@ -25,7 +25,7 @@ class BackgroundImgWithPlayIcon extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: movie.posterPath != null
                   ? '${ApiConstants.baseImageUrl}${movie.posterPath}'
-                  : 'https://files.oaiusercontent.com/file-JbmUC7TQ2ysncKUQPoxQvG?se=2024-12-25T14%3A53%3A05Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dcf96d8c5-c6bf-458c-bb1e-b4b15fac0f27.webp&sig=sm3etU6wlEwNVUB7bzAv994gVKj14MRaWCoKDKJRJD0%3D',
+                  : 'https://www.rockettstgeorge.co.uk/cdn/shop/products/no_selection_64feb3dc-4df2-4152-994f-fb44eac86064.jpg?v=1683648946',
               filterQuality: FilterQuality.high,
               fit: BoxFit.fill,
             ),

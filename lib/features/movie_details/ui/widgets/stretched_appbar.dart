@@ -26,7 +26,7 @@ class StretchedAppbar extends StatelessWidget {
           if (state is TrailerSuccess) {
             return FlexibleSpaceBar(
               background: Hero(
-                tag: movie.id!.toInt(),
+                tag: movie.id!,
                 child: GestureDetector(
                   onTap: () async {
                     Uri url = Uri.parse(

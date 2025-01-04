@@ -40,7 +40,7 @@ class MovieApp extends StatelessWidget {
         ),
         builder: (context, child) {
           return GradientBackground(
-            child: child ?? const SizedBox.shrink(),
+            child: child,
           );
         },
       ),
@@ -49,7 +49,7 @@ class MovieApp extends StatelessWidget {
 }
 
 class GradientBackground extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
   const GradientBackground({super.key, required this.child});
 
