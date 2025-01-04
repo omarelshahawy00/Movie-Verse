@@ -7,7 +7,7 @@ part 'favorites_state.dart';
 class FavoritesCubit extends Cubit<FavoritesState> {
   FavoritesCubit() : super(FavoritesInitial());
 
-  getFavorites() {
+  void getFavorites() {
     emit(FavoritesLoading());
 
     try {

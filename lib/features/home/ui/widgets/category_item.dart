@@ -40,11 +40,11 @@ class CategoryItem extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              BlocProvider.of<CategoryCubit>(context).selectButton(index);
               if (selectedIndex != index) {
                 BlocProvider.of<AllMoviesCubit>(context)
                     .fetchMovies(categoryEndpoints[index]);
               }
+              BlocProvider.of<CategoryCubit>(context).selectButton(index);
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 100),

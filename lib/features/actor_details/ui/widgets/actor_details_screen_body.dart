@@ -89,7 +89,7 @@ class ActorDetailsScreenBody extends StatelessWidget {
                                 imageUrl: state.actorMovies[index].posterPath !=
                                         null
                                     ? '${ApiConstants.baseImageUrl}${state.actorMovies[index].posterPath}'
-                                    : 'https://files.oaiusercontent.com/file-LqhGwCxtVmTrTjuzQNfNBZ?se=2024-12-23T15%3A36%3A09Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D166e1004-c224-4d86-9972-945453b0c49a.webp&sig=jfAmSRXms8/qCGQxAR7ioxWobQSZdnaxyNhuqXH23zw%3D',
+                                    : 'https://www.rockettstgeorge.co.uk/cdn/shop/products/no_selection_64feb3dc-4df2-4152-994f-fb44eac86064.jpg?v=1683648946',
                               ),
                             );
                           },
