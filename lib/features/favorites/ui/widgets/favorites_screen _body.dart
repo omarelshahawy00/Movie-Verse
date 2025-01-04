@@ -1,30 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
 import 'package:movie_app/core/constants/color_manager.dart';
 import 'package:movie_app/core/helpers/routes.dart';
 import 'package:movie_app/core/theming/styles.dart';
-import 'package:movie_app/core/widgets/app_text_form_field.dart';
 import 'package:movie_app/core/widgets/rating_item.dart';
 import 'package:movie_app/core/widgets/custome_movie_item.dart';
 import 'package:movie_app/features/favorites/data/hive_services.dart';
 import 'package:movie_app/features/favorites/data/models/favorites_model_extension.dart';
-import 'package:movie_app/features/favorites/manager/cubit/favorites_cubit.dart';
-import 'package:movie_app/features/search/manager/cubit/search_cubit.dart';
+import 'package:movie_app/features/favorites/manager/favorites_cubit/favorites_cubit.dart';
 
-class FavoritesScreenBody extends StatefulWidget {
+class FavoritesScreenBody extends StatelessWidget {
   const FavoritesScreenBody({super.key});
 
-  @override
-  State<FavoritesScreenBody> createState() => _FavoritesScreenBodyState();
-}
-
-class _FavoritesScreenBodyState extends State<FavoritesScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Row(
+            children: [
+              const Text('Clear All', style: Styles.textStyle16),
+              IconButton(
+                onPressed: () {
+                  HiveServices.clearAllItems().then(
+                    (value) {
+                      if (context.mounted) {
+                        BlocProvider.of<FavoritesCubit>(context).getFavorites();
+                      }
+                    },
+                  );
+                },
+                icon: const Icon(
+                  Icons.delete_forever,
+                  size: 35,
+                  color: ColorManager.primaryColor,
+                ),
+              ),
+            ],
+          ),
+        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text('Favorites'),
@@ -52,7 +69,7 @@ class _FavoritesScreenBodyState extends State<FavoritesScreenBody> {
                   }
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: GridView(
+                    child: GridView.builder(
                       physics: const BouncingScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
@@ -61,34 +78,41 @@ class _FavoritesScreenBodyState extends State<FavoritesScreenBody> {
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
                       ),
-                      shrinkWrap: true,
-                      children: List.generate(state.favorites.length, (index) {
+                      itemCount: state.favorites.length,
+                      itemBuilder: (context, index) {
                         final favorite = state.favorites[index];
                         return GestureDetector(
                           onTap: () {
-                            GoRouter.of(context).push(
-                              Routes.movieDetailsScreen,
-                              extra: favorite.toMovieModel(),
+                            GoRouter.of(context)
+                                .push(Routes.movieDetailsScreen,
+                                    extra: favorite.toMovieModel())
+                                .then(
+                              (value) {
+                                if (context.mounted) {
+                                  BlocProvider.of<FavoritesCubit>(context)
+                                      .getFavorites();
+                                }
+                              },
                             );
                           },
                           child: CustomeMovieItem(
                             rating: RatingItem(
-                              count: state.favorites[index].voteCount!.toInt(),
+                              count: favorite.voteCount!.toInt(),
                               avg: double.parse(
-                                state.favorites[index].voteAverage!
-                                    .toStringAsFixed(1),
+                                favorite.voteAverage!.toStringAsFixed(1),
                               ),
                             ),
-                            movieName: (state.favorites[index].title),
-                            txtStyle: Styles.textStyle16
-                                .copyWith(fontWeight: FontWeight.bold),
-                            imageUrl: state.favorites[index].posterPath != null
-                                ? '${ApiConstants.baseImageUrl}${state.favorites[index].posterPath}'
-                                : 'https://files.oaiusercontent.com/file-LqhGwCxtVmTrTjuzQNfNBZ?se=2024-12-23T15%3A36%3A09Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D166e1004-c224-4d86-9972-945453b0c49a.webp&sig=jfAmSRXms8/qCGQxAR7ioxWobQSZdnaxyNhuqXH23zw%3D',
+                            movieName: favorite.title,
+                            txtStyle: Styles.textStyle16.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            imageUrl: favorite.posterPath != null
+                                ? '${ApiConstants.baseImageUrl}${favorite.posterPath}'
+                                : 'https://www.rockettstgeorge.co.uk/cdn/shop/products/no_selection_64feb3dc-4df2-4152-994f-fb44eac86064.jpg?v=1683648946',
                             icon: GestureDetector(
                               onTap: () {
                                 HiveServices.deleteItem(
-                                  state.favorites[index].id!,
+                                  favorite.id!,
                                 );
                                 BlocProvider.of<FavoritesCubit>(context)
                                     .getFavorites();
@@ -101,7 +125,7 @@ class _FavoritesScreenBodyState extends State<FavoritesScreenBody> {
                             ),
                           ),
                         );
-                      }),
+                      },
                     ),
                   );
                 } else if (state is FavoritesFailure) {

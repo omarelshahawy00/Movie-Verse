@@ -6,6 +6,7 @@ import 'package:movie_app/core/helpers/routes.dart';
 import 'package:movie_app/core/helpers/spaceing.dart';
 import 'package:movie_app/core/widgets/custom_loading_indecator.dart';
 import 'package:movie_app/features/home/manager/all_movies_cubit/all_movies_cubit.dart';
+import 'package:movie_app/features/home/manager/category_cubit/category_cubit.dart';
 import 'package:movie_app/features/home/ui/widgets/main_movie_item.dart';
 
 class MoviesGridView extends StatelessWidget {

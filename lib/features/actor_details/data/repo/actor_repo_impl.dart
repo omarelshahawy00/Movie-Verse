@@ -1,6 +1,5 @@
 import 'package:movie_app/core/helpers/credits_api_service.dart';
 import 'package:movie_app/features/actor_details/data/model/actor_model.dart';
-import 'package:movie_app/features/actor_details/data/model/actor_movies_model.dart';
 import 'package:movie_app/features/actor_details/data/repo/actor_repo.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
 

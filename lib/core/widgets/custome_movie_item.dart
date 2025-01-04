@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_app/core/constants/color_manager.dart';
-import 'package:movie_app/features/favorites/data/hive_services.dart';
 
 class CustomeMovieItem extends StatelessWidget {
   const CustomeMovieItem({
@@ -31,12 +29,12 @@ class CustomeMovieItem extends StatelessWidget {
             foregroundDecoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [
-                    const Color.fromARGB(255, 36, 36, 36).withOpacity(.85),
-                    const Color.fromARGB(255, 36, 36, 36).withAlpha(0),
+                    const Color.fromARGB(255, 36, 36, 36).withValues(alpha: .9),
+                    const Color.fromARGB(255, 36, 36, 36).withValues(alpha: 0),
                   ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.center,
-                  stops: [.4.h, 1.h]),
+                  stops: [.3.h, 1.h]),
             ),
             child: CachedNetworkImage(
               placeholder: (context, url) => Center(
@@ -53,7 +51,7 @@ class CustomeMovieItem extends StatelessWidget {
         ),
         Positioned(
           left: 110.w,
-          top: 180.h,
+          top: 150.h,
           child: icon ?? Container(),
         ),
         Positioned(

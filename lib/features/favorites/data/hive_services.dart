@@ -26,7 +26,6 @@ class HiveServices {
   static Future<void> deleteItem(int id) async {
     final box = Hive.box<FavoritesModel>(favMovies);
     await box.delete(id);
-    ;
 
     // Logging and Verification
     final deletedItem = box.get(id);
@@ -35,6 +34,11 @@ class HiveServices {
     } else {
       print('Failed to delete movie with ID: $id');
     }
+  }
+
+  static Future<void> clearAllItems() async {
+    final box = Hive.box<FavoritesModel>(favMovies);
+    await box.clear();
   }
   // static Future<void> addItem(FavoritesModel movie) async {
   //   await Hive.box<FavoritesModel>(favMovies).put(movie.id, movie);

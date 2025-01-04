@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:bloc/bloc.dart';
 import 'package:movie_app/features/actor_details/data/model/actor_model.dart';
 import 'package:movie_app/features/actor_details/data/repo/actor_repo_impl.dart';

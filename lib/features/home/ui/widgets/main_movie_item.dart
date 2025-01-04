@@ -1,7 +1,9 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:movie_app/core/constants/api_constants.dart';
 import 'package:movie_app/core/constants/color_manager.dart';
 import 'package:movie_app/core/theming/styles.dart';
@@ -10,61 +12,23 @@ import 'package:movie_app/features/favorites/data/hive_services.dart';
 import 'package:movie_app/features/favorites/data/models/favorites_model.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
 
-class MainMovieItem extends StatefulWidget {
+class MainMovieItem extends StatelessWidget {
   const MainMovieItem({super.key, required this.movieModel});
   final MovieModel movieModel;
-
-  @override
-  State<MainMovieItem> createState() => _MainMovieItemState();
-}
-
-class _MainMovieItemState extends State<MainMovieItem> {
-  bool isFav = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    isFav =
-        HiveServices.getItems().any((item) => item.id == widget.movieModel.id);
-  }
-
-  void _toggleFavorite() {
-    setState(() {
-      isFav = !isFav;
-    });
-
-    if (isFav) {
-      HiveServices.addItem(
-          movie: FavoritesModel(
-        posterPath: widget.movieModel.posterPath ?? '',
-        title: widget.movieModel.title ?? '',
-        id: widget.movieModel.id ?? 0,
-        voteAverage: widget.movieModel.voteAverage ?? 0.0,
-        voteCount: widget.movieModel.voteCount ?? 0,
-        releaseDate: widget.movieModel.releaseDate ?? 'Unknown',
-        overview: widget.movieModel.overview ?? 'No overview available',
-        mainLanguage: widget.movieModel.originalLanguage ?? 'Unknown',
-      ));
-    } else {
-      if (widget.movieModel.id != null) {
-        HiveServices.deleteItem(widget.movieModel.id!);
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // Movie Poster with Gradient
         ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Container(
             foregroundDecoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  const Color.fromARGB(255, 36, 36, 36).withOpacity(.85),
-                  const Color.fromARGB(255, 36, 36, 36).withOpacity(0),
+                  const Color.fromARGB(255, 36, 36, 36).withValues(alpha: .91),
+                  const Color.fromARGB(255, 36, 36, 36).withValues(alpha: 0),
                 ],
                 begin: Alignment.bottomCenter,
                 end: Alignment.center,
@@ -72,31 +36,23 @@ class _MainMovieItemState extends State<MainMovieItem> {
               ),
             ),
             child: Hero(
-              tag: widget.movieModel.id!.toInt(),
+              tag: movieModel.id!,
               child: CachedNetworkImage(
                 placeholder: (context, url) => Center(
                   child: Image.asset('assets/images/loading2.gif'),
                 ),
                 imageUrl:
-                    '${ApiConstants.baseImageUrl}${widget.movieModel.posterPath}',
+                    '${ApiConstants.baseImageUrl}${movieModel.posterPath ?? ''}',
                 fit: BoxFit.fill,
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),
         ),
-        Positioned(
-          left: 113.w,
-          top: 180.h,
-          child: GestureDetector(
-            onTap: _toggleFavorite,
-            child: Icon(
-              isFav ? Icons.favorite : Icons.favorite_border,
-              size: 30,
-              color: ColorManager.primaryColor,
-            ),
-          ),
-        ),
+
+        // Favorite Icon
+
+        // Movie Title
         Positioned(
           bottom: 30.h,
           left: 7.5.w,
@@ -104,7 +60,7 @@ class _MainMovieItemState extends State<MainMovieItem> {
           child: Container(
             margin: EdgeInsets.only(left: 7.5.w, right: 50.w),
             child: Text(
-              widget.movieModel.title ?? '',
+              movieModel.title ?? '',
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
               style:
@@ -112,14 +68,15 @@ class _MainMovieItemState extends State<MainMovieItem> {
             ),
           ),
         ),
+
+        // Rating Item
         Positioned(
           bottom: 8.h,
           left: 15.w,
           right: 0,
           child: RatingItem(
-            avg:
-                double.parse(widget.movieModel.voteAverage!.toStringAsFixed(1)),
-            count: widget.movieModel.voteCount!.toInt(),
+            avg: double.parse(movieModel.voteAverage!.toStringAsFixed(1)),
+            count: movieModel.voteCount!.toInt(),
           ),
         ),
       ],

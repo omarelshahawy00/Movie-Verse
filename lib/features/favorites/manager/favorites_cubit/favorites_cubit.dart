@@ -1,15 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:movie_app/features/favorites/data/hive_services.dart';
 import 'package:movie_app/features/favorites/data/models/favorites_model.dart';
-import 'package:movie_app/features/home/data/models/movie_model.dart';
 
 part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
   FavoritesCubit() : super(FavoritesInitial());
 
-  getFavorites() {
+  void getFavorites() {
     emit(FavoritesLoading());
 
     try {
