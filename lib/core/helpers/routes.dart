@@ -6,6 +6,7 @@ import 'package:movie_app/features/actor_details/data/repo/actor_repo_impl.dart'
 import 'package:movie_app/features/actor_details/manager/actor_cubit/actor_cubit.dart';
 import 'package:movie_app/features/actor_details/manager/actor_movies_cubit/actor_movies_cubit.dart';
 import 'package:movie_app/features/actor_details/ui/actor_details_screen.dart';
+import 'package:movie_app/features/favorites/data/models/favorites_model.dart';
 import 'package:movie_app/features/favorites/manager/add_to_favorites_cubit/add_to_favorites_cubit.dart';
 import 'package:movie_app/features/home/data/models/movie_model.dart';
 import 'package:movie_app/features/home/data/repos/home_repo_impl.dart';
@@ -57,7 +58,7 @@ class Routes {
       GoRoute(
         path: movieDetailsScreen,
         builder: (BuildContext context, GoRouterState state) {
-          final movie = state.extra as MovieModel; // Extract the movie object
+          final movie = state.extra as MovieModel;
 
           return MultiBlocProvider(
             providers: [
@@ -72,8 +73,7 @@ class Routes {
               ),
             ],
             child: MovieDetailsScreen(
-              movie: movie, // Provide a default value or handle null case
-              // Provide a default value or handle null case
+              movie: movie,
             ),
           );
         },

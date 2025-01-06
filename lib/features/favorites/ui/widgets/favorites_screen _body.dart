@@ -83,9 +83,12 @@ class FavoritesScreenBody extends StatelessWidget {
                         final favorite = state.favorites[index];
                         return GestureDetector(
                           onTap: () {
+                            // GoRouter.of(context)
+                            //     .push(Routes.movieDetailsScreen,
+                            //         extra: favorite.toMovieModel())
                             GoRouter.of(context)
                                 .push(Routes.movieDetailsScreen,
-                                    extra: favorite.toMovieModel())
+                                    extra: favorite)
                                 .then(
                               (value) {
                                 if (context.mounted) {
