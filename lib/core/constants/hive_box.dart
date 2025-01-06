@@ -1,0 +1,1 @@
+const String favMovies = 'favMovies';

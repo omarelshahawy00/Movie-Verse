@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movie_app/core/helpers/routes.dart';
 import 'package:movie_app/core/widgets/custom_error.dart';
 import 'package:movie_app/core/widgets/custom_loading_indecator.dart';
 import 'package:movie_app/features/home/manager/trending_movies_cubit/trending_movie_cubit.dart';
@@ -27,13 +29,18 @@ class SlidingListView extends StatelessWidget {
                 autoPlayInterval: const Duration(seconds: 3),
                 viewportFraction: .8,
                 aspectRatio: 9 / 9,
-                initialPage: 0,
               ),
               itemCount: state.movies.length,
               itemBuilder: (context, index, realIndex) {
                 final movie = state.movies[index];
-                return TopMovieItem(
-                  urlImage: movie.posterPath ?? '',
+                return GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push(Routes.movieDetailsScreen,
+                        extra: state.movies[index]);
+                  },
+                  child: TopMovieItem(
+                    urlImage: movie.posterPath ?? '',
+                  ),
                 );
               },
             );

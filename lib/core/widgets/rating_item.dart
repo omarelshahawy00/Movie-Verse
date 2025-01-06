@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie_app/core/helpers/spaceing.dart';
-import 'package:movie_app/core/helpers/styles.dart';
+import 'package:movie_app/core/theming/styles.dart';
 
 class RatingItem extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;

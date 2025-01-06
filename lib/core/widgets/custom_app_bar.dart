@@ -21,11 +21,11 @@ class CustomAppBar extends StatelessWidget {
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       children: [
         Image.asset(
-          logo ?? AssetsData.movieLogo,
+          logo ?? AssetsData.logo2,
           width: 60.w,
         ),
         Text(
-          title ?? ' Movies',
+          title ?? ' ',
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
