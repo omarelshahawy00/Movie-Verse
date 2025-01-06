@@ -13,5 +13,3 @@ final class AddToFavoritesFailure extends AddToFavoritesState {
 }
 
 final class AddToFavoritesDelete extends AddToFavoritesState {}
-
-final class AddToFavoritesClearAll extends AddToFavoritesState {}

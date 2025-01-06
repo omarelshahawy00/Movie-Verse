@@ -25,13 +25,4 @@ class AddToFavoritesCubit extends Cubit<AddToFavoritesState> {
       emit(AddToFavoritesFailure(e.toString()));
     }
   }
-
-  Future<void> clearAllItems() async {
-    try {
-      await HiveServices.clearAllItems();
-      emit(AddToFavoritesClearAll());
-    } on Exception catch (e) {
-      emit(AddToFavoritesFailure(e.toString()));
-    }
-  }
 }
