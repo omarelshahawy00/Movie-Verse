@@ -18,7 +18,7 @@
 </queries>
 
     <application
-        android:label="MovieVerse"
+        android:label="Movie Verse"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
